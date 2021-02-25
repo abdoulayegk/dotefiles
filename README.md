@@ -1,4 +1,4 @@
-# myVimrc
+# Vimrc
 To make this work follow these steps for linux users
 The awesome version includes a lot of great plugins, configurations and color schemes that make Vim a lot better.
 1 To install it simply do following from your terminal:
