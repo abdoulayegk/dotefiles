@@ -28,5 +28,9 @@ Do simply the following: cd .vim/bundle then paste this into your terminal:git c
 
 This is inspired by Amix
 
+when you update this repo you might get this warning: The legacy Snopmate parser is deprecated. Please see : h SnipMate-deprecate.
+Add the following in your vimrc file: let g:snipMate = { 'snippet_version' : 1 }
+This will most probably fix the issue.
+
 
 
