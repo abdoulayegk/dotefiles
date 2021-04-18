@@ -1,0 +1,61 @@
+{
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "editor.formatOnSave": true,
+    "editor.minimap.maxColumn": 80,
+    "editor.fontSize": 20,
+    "editor.rulers": [
+        79
+    ],
+    "editor.wordWrap": "on",
+    "files.exclude": {
+        "__pycache__": true,
+        ".vscode": true
+    },
+    "editor.fontWeight": 20,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindingsNonRecursive": [
+
+        {
+            "before": ["<leader>", "o"],
+            "after": [],
+            "commands": [
+               "workbench.action.closeOtherEditors",
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before":["<C-h>"],
+            "commands": [
+                ":nohl",
+            ]
+        },
+        {
+            "before": ["leader", "w"],
+            "commands": [
+                "workbench.action.files.save",
+            ]
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+
+
+    "vim.leader": ",",
+    "vim.scroll": 7,
+    "vim.cursorStylePerMode.insert": "block",
+    "vim.history": 5000,
+    "vim.smartRelativeLine": true,
+    "vim.useSystemClipboard": true
+    
+}
