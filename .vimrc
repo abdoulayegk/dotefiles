@@ -41,6 +41,11 @@ noremap <C-Z> <C-O>:update<CR>
 noremap <Leader>e :quit<CR>
 noremap <Leader>E :qa!<CR>
 
+
+" easier moving of code blocks
+vnoremap < <gv " better indentation
+vnoremap > >gv "better intentaion
+
 "Let vimrc configuration changes take effect immediately'
  autocmd BufWritePost $MYVIMRC  source  $MYVIMRC
 
