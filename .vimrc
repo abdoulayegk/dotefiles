@@ -41,6 +41,9 @@ noremap <C-Z> <C-O>:update<CR>
 noremap <Leader>e :quit<CR>
 noremap <Leader>E :qa!<CR>
 
+let g:snipMate = { 'snippet_version' : 1 }
+inoremap jh <Esc>
+
 
 " easier moving of code blocks
 vnoremap < <gv " better indentation
