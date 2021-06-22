@@ -192,3 +192,7 @@ let g:vim_markdown_folding_style_pythonic = 1
  " For Fuzz Finding  fzf
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" press F9 to compile and run c++ code
+map <F9> :!clear; g++ -g % -o %:r && ./%:r <CR>
+map <F5> :!g++ -g % -o %:r <CR>
