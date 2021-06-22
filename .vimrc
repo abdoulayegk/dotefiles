@@ -67,6 +67,16 @@ set fileencoding=utf-8
 set fileencodings=utf-8
 set ttyfast
 
+" Hide the status bar of vim
+let s:hidden_all = 0
+if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+endif
+
 set hidden
 "" Searching
 set hlsearch
