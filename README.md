@@ -14,8 +14,10 @@ The awesome version includes a lot of great plugins, configurations and color sc
   paste the following code to your terminal: 
 1. Install to ~/.vim/autoload/pathogen.vim. Or copy and paste the following into your terminal/shell:
 
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+2. mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+3. You would need to install black for python formating:
+cd .vim/bundle then do paste this command: git clone git@github.com:psf/black.git
 
 If you're using Windows, change all occurrences of ~/.vim to ~\vimfiles.
 2. Add this to your vimrc:
