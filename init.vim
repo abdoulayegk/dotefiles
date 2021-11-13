@@ -13,6 +13,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tlib_vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'BenGH28/neo-runner.nvim', {'do': ':UpdateRemotePlugins'}
 
 
 " Initialize plugin system
@@ -76,8 +78,16 @@ set noshowmode
 set noruler
 set laststatus=0
 set noshowcmd
+" shw existing tabe with 4 spaces width
+set tabstop=4
+" when indented with '>' use 4 spaces width
+set shiftwidth=4
+
+" On pressing tab insert 4 spaces
+set expandtab
 
 set hidden
+
 "" Searching
 set hlsearch
 set incsearch
@@ -152,7 +162,7 @@ let g:ale_fix_on_save = 1
 
  augroup rungroup
      autocmd!
-     autocmd BufRead,BufNewFile *.go nnoremap <F9> :exec '!go run' shellescape(@%, 1)<cr>
+     autocmd BufRead,BufNewFile *.go nnoremap <F9> :exec '!python run' shellescape(@%, 1)<cr>
      autocmd BufRead,BufNewFile *.py nnoremap <F9> :exec '! clear; python' shellescape(@%, 1)<cr>
  augroup END
 
