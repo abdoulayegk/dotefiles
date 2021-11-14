@@ -1,21 +1,30 @@
 call plug#begin('~/.vim/plugged')
 
 "To install plugings
+" Pluging for file explorer
 Plug 'preservim/nerdtree'
+" colorscheme
 Plug 'altercation/vim-colors-solarized'
+" To comment code using gcc
 Plug 'tpope/vim-commentary'
+"Python autoformating very good one
 Plug 'psf/black'
+" fzf finder
 Plug 'ctrlpvim/ctrlp.vim'
+" for code snippets
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+" Auto pairs [],{}, ()
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tlib_vim'
+" vim fzf finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" Languages icons
 Plug 'ryanoasis/vim-devicons'
-Plug 'BenGH28/neo-runner.nvim', {'do': ':UpdateRemotePlugins'}
-
+" For centering text in a nice looking format
+Plug 'junegunn/goyo.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -28,6 +37,8 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 " colorscheme
 syntax enable
+syntax on
+set cindent              "indentation C/C++
 set background=dark
 colorscheme solarized
 set tw=80 " with of the document(used by gd)
@@ -39,7 +50,18 @@ highlig colorcolumn ctermbg = 233
 set relativenumber
 " to solve pylint
 " autocmd BufWritePost *.py call Flake8()
-
+" Enable autocompletion:
+	set wildmode=longest,list,full
+" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" Perform dot commands over visual blocks:
+	vnoremap . :normal .<CR>
+" Goyo plugin makes text more readable when writing prose:
+	map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
+" Spell-check set to <leader>o, 'o' for 'orthography':
+	map <leader>o :setlocal spell! spelllang=en_us<CR>
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+	set splitbelow splitright
 " while in insert mode, moves you to the end of the next line when you type
 imap ;ne <esc>/;<cr>a
 imap jj <Esc>
@@ -52,12 +74,16 @@ noremap <C-Z> <C-O>:update<CR>
 "Quick quit command
 noremap <Leader>e :quit<CR>
 noremap <Leader>E :qa!<CR>
+noremap <Leader>h :noh<CR>
 inoremap jj <Esc>
 
 " remember cursor positions
 set viminfo='25,\"50,n~/.viminfo
 
 let g:snipMate = { 'snippet_version' : 1 }
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsListSnippets="<c-l>"
+
 
 "change the title to include the current file
 set icon
@@ -66,8 +92,8 @@ auto BufEnter * let &iconstring = "vim " . expand("%:t")
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
 "" Encoding
-set encoding=utf-8
-set fileencoding=utf-8
+set encoding=UTF-8
+
 set fileencodings=utf-8
 set ttyfast
 
@@ -100,24 +126,16 @@ cmap w!! %!sudo tee > /dev/null %
 set title
 set titleold="Terminal"
 set titlestring=%F
-
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
-
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" Status bar formatting
-set statusline=[%n]%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
-set list listchars=tab:▸\ ,trail:·
-
 set fileformats=unix,dos,mac
-
 " Enable mouse support. You should avoid relying on this too much, but it can
 " sometimes be convenient.
 set mouse+=a
@@ -144,7 +162,6 @@ set linespace=8
 " To check quality of the code.
 let g:ale_linters = {
       \   'python': ['flake8', 'pylint'],
-      \   'ruby': ['standardrb', 'rubocop'],
       \   'javascript': ['eslint'],
       \}
 
@@ -157,17 +174,6 @@ let g:ale_fixers = {
 autocmd BufWritePre *.py execute ':Black'
 nnoremap <F9> :Black<CR>
 let g:ale_fix_on_save = 1
-
-" for running the scrip in the terminal by just pressing F9 for python and go
-
- augroup rungroup
-     autocmd!
-     autocmd BufRead,BufNewFile *.go nnoremap <F9> :exec '!python run' shellescape(@%, 1)<cr>
-     autocmd BufRead,BufNewFile *.py nnoremap <F9> :exec '! clear; python' shellescape(@%, 1)<cr>
- augroup END
-
- " To execute C programming code using F5 key
- map <F8> : ! clear; gcc % && ./a.out <CR>
 set exrc
 set secure
 
@@ -188,26 +194,22 @@ silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%
  " The following commands are useful to open and close folds:
 let g:vim_markdown_folding_style_pythonic = 1
 
- " zr: reduces fold level throughout the buffer
- " zR: opens all folds
- " zm: increases fold level throughout the buffer
- " zM: folds everything all the way
- " za: open a fold your cursor is on
- " zA: open a fold your cursor is on recursively
- " zc: close a fold your cursor is on
- " zC: close a fold your cursor is on recursively
+" Enable Goyo by default for mutt writing
+	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=light
+	autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
+	autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
+
+" Automatically deletes all trailing whitespace and newlines at end of file on save.
+	autocmd BufWritePre * %s/\s\+$//e
+	autocmd BufWritePre * %s/\n\+\%$//e
+	autocmd BufWritePre *.[ch] %s/\%$/\r/e
 
  " For Fuzz Finding  fzf
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+" use leader + f to search for files in vim
 nnoremap <Leader>f :Files<Cr>
-
-
-" press F9 to compile and run c++ code
-map <F9> :!clear; g++ -g % -o %:r && ./%:r <CR>
-map <F5> :!g++ -g % -o %:r <CR>
-
-" for cpp autoformating
 
 " to hide vim status bar
 let s:hidden_all = 0
@@ -225,16 +227,11 @@ let s:hidden_all = 0
         " set laststatus=2
         " set showcmd
     endif
-" endfunction
-
-" nnoremap <S-h> :call ToggleHiddenAll()<CR>
-" Alway enable preview window on the right with 60% width
 
 " TO enable virtual evironment python
 let g:python3_host_prog='/usr/bin/python3'
 
 " To move easily between tabs using leader
-
 " Go to tab by number
 noremap <leader>1 1gt
 noremap <leader>2 2gt
@@ -246,3 +243,8 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+
+" Run code using F9
+autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
+autocmd filetype c nnoremap <F9> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
