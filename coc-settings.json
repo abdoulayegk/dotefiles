@@ -1,0 +1,36 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": [
+        "c",
+        "markdown",
+        "javascript",
+        "cpp",
+        "html",
+        "yaml",
+        "json",
+        "python"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    }
+}
