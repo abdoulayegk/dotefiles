@@ -1,18 +1,33 @@
 {
-    "workbench.colorTheme": "Solarized Dark",
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "[python]": {
+        "editor.wordBasedSuggestions": false,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": true,
+        "editor.semanticHighlighting.enabled": false
+    },
+    "[cpp]": {
+        "editor.wordBasedSuggestions": false,
+        "editor.suggest.insertMode": "replace",
+        "editor.semanticHighlighting.enabled": true,
+        "editor.tabSize": 2
+    },
+    "[c]": {
+        "editor.wordBasedSuggestions": false,
+        "editor.suggest.insertMode": "replace",
+        "editor.semanticHighlighting.enabled": true,
+        "editor.tabSize": 2
+    },
     "editor.formatOnSave": true,
     "editor.minimap.maxColumn": 80,
     "editor.fontSize": 20,
     "editor.rulers": [
         79
     ],
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "off",
     "files.exclude": {
         "__pycache__": true,
         ".vscode": true
@@ -20,42 +35,92 @@
     "editor.fontWeight": 20,
     "vim.hlsearch": true,
     "vim.insertModeKeyBindingsNonRecursive": [
-
         {
-            "before": ["<leader>", "o"],
+            "before": [
+                "<leader>",
+                "o"
+            ],
             "after": [],
             "commands": [
-               "workbench.action.closeOtherEditors",
+                "workbench.action.closeOtherEditors",
             ]
         }
     ],
     "vim.normalModeKeyBindings": [
         {
-            "before":["<C-h>"],
+            "before": [
+                "<C-h>"
+            ],
             "commands": [
                 ":nohl",
             ]
         },
         {
-            "before": ["leader", "w"],
+            "before": [
+                "leader",
+                "w"
+            ],
             "commands": [
                 "workbench.action.files.save",
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "e"
+            ],
+            "commands": [
+                "workbench.action.closeFiles",
             ]
         }
     ],
     "vim.insertModeKeyBindings": [
         {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
         }
     ],
-
-
     "vim.leader": ",",
     "vim.scroll": 7,
     "vim.cursorStylePerMode.insert": "block",
     "vim.history": 5000,
     "vim.smartRelativeLine": true,
-    "vim.useSystemClipboard": true
-    
+    "vim.useSystemClipboard": true,
+    "C_Cpp.updateChannel": "Insiders",
+    "python.languageServer": "Pylance",
+    "debug.onTaskErrors": "abort",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "terminal.integrated.inheritEnv": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.terminal.launchArgs": [],
+    "code-runner.clearPreviousOutput": true,
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "code-runner.runInTerminal": true,
+    "workbench.startupEditor": "none",
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.lineNumbers": "relative",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.tabCompletion": "on",
+    "editor.formatOnType": true,
+    "editor.fontLigatures": null,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "python.linting.banditEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "window.zoomLevel": 2,
+    "editor.formatOnPaste": true
 }
