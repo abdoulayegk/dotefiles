@@ -4,8 +4,9 @@ The awesome version includes a lot of great plugins, configurations and color sc
 
 1 To install it simply do following from your terminal:
 
+``` bash
   git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime sh ~/.vim_runtime/install_awesome_vimrc.sh.
-  
+  ```
   2- Find your vimrc file by just using this command: vim ~./vimrc if it doesn't exit then you should create it.
   3- Copy the content of the vimrc.txt and paste into the .vimrc
   4- Save and reload your vimrc by using these commands: :w ==> to save then : source ~/.vimrc
@@ -14,11 +15,15 @@ The awesome version includes a lot of great plugins, configurations and color sc
   paste the following code to your terminal: 
 1. Install to ~/.vim/autoload/pathogen.vim. Or copy and paste the following into your terminal/shell:
 
-2. mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+```bash
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+```
 3. You would need to install black for python formating:
-cd .vim/bundle then do paste this command: git clone git@github.com:psf/black.git
-
+cd .vim/bundle then do paste this command:
+```bash
+git clone git@github.com:psf/black.git
+```
 If you're using Windows, change all occurrences of ~/.vim to ~\vimfiles.
 2. Add this to your vimrc:
 execute pathogen#infect()
