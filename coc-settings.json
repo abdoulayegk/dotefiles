@@ -1,4 +1,5 @@
 {
+    "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "c",
         "markdown",
@@ -8,6 +9,13 @@
         "yaml",
         "json",
         "python"
+    ],
+    "coc.preferences.formatOnType": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "$HOME/.local/bin/black",
+    "snippets.ultisnips.directories": [
+        "$HOME/.config/nvim/Ultisnips/",
+        "$HOME/.vim/plugged/vim-snippets/UltiSnips/"
     ],
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
