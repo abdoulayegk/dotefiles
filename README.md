@@ -1,4 +1,5 @@
 # Vimrc
+![Vimrc](https://github.com/abdoulayegk/Dotefiles/blob/main/nvimcpp.png)
 To make this work follow these steps for linux users
 The awesome version includes a lot of great plugins, configurations and color schemes that make Vim a lot better.
 
