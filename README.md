@@ -1,4 +1,4 @@
-# Vimrc
+# My Vimrc
 ![Vimrc](https://github.com/abdoulayegk/Dotefiles/blob/main/nvimcpp.png)
 To make this work follow these steps for linux users
 The awesome version includes a lot of great plugins, configurations and color schemes that make Vim a lot better.
@@ -39,6 +39,7 @@ This is inspired by Amix
 when you update this repo you might get this warning: The legacy Snopmate parser is deprecated. Please see : h SnipMate-deprecate.
 Add the following in your vimrc file: let g:snipMate = { 'snippet_version' : 1 }
 This will most probably fix the issue.
-
+### more images
+![vimrc](https://github.com/abdoulayegk/Dotefiles/blob/main/vimrcimg.png)
 
 
