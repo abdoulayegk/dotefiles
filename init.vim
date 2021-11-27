@@ -1,6 +1,6 @@
 " ===============================================================================
 "
-" 						MY VIMRC
+" VIMRC
 "
 " ===============================================================================
 
@@ -52,17 +52,32 @@ let g:coc_global_extensions = [ 'coc-pyright' ]
 au! BufWritePost $MYVIMRC source % " Auto source the vimrc
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<TAB>" :
+"       \ <SID>check_back_space() ? "\<C-n>" :
+"       \ coc#refresh()
+" " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+" ============================================================================
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<TAB>" :
-      \ <SID>check_back_space() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+
 set pumheight=10 "Make popup menu smaller
 set pumwidth=15
 " Use <c-space> to trigger completion.
@@ -83,6 +98,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rr <Plug>(coc-rename)
+
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -97,9 +114,6 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <F2> <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -392,12 +406,3 @@ autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<
 autocmd filetype c nnoremap <F9> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd filetype cpp nnoremap <F9> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd filetype js nnoremap <F9> :w <bar> exec '!node '.shellescape('%')<CR>
-
-" Filetype specific commands
-augroup filtypes
-    autocmd!
-    autocmd FileType c,cpp setlocal comments^=:///
-    autocmd FileType c,cpp setlocal commentstring=///\ %s
-    autocmd FileType crontab setlocal nobackup nowritebackup
-    autocmd FileType make setlocal noexpandtab
-augroup end
