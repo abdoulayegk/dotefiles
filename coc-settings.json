@@ -14,9 +14,10 @@
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "$HOME/.local/bin/black",
     "snippets.ultisnips.directories": [
-        "$HOME/.config/nvim/Ultisnips/",
-        "$HOME/.vim/plugged/vim-snippets/UltiSnips/"
+        "/home/balde/.vim/plugged/vim-snippets/UltiSnips/"
     ],
+    "snippets.snipmate.enable": true,
+    "snippets.autoTrigger": true,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "languageserver": {
