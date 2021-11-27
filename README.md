@@ -41,5 +41,7 @@ Add the following in your vimrc file: let g:snipMate = { 'snippet_version' : 1 }
 This will most probably fix the issue.
 ### more images
 ![vimrc](https://github.com/abdoulayegk/Dotefiles/blob/main/vimrcimg.png)
+![c language](https://github.com/abdoulayegk/Dotefiles/blob/main/nvimc.png)
+![python](https://github.com/abdoulayegk/Dotefiles/blob/main/nvim0.png)
 
 
