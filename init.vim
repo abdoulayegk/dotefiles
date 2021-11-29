@@ -1,7 +1,5 @@
 " ===============================================================================
-"
-" VIMRC
-"
+"                                  MY VIMRC
 " ===============================================================================
 
 call plug#begin('~/.vim/plugged')
@@ -15,6 +13,7 @@ Plug 'ryanoasis/vim-devicons'
 "Python autoformating very good one
 Plug 'psf/black'
 " for code snippets
+Plug 'rafamadriz/friendly-snippets'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -31,6 +30,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'mhartington/formatter.nvim'
 
+" Code formatting (for c++)
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 "=============================================================================
 Plug 'hrsh7th/nvim-compe'
@@ -58,7 +61,7 @@ set updatetime=300
 set timeoutlen=500 " Fast saving
 set scrolloff=8
 set cindent              "indentation C/C++
-set background=dark
+" set background=dark
 colorscheme gruvbox
 set tw=80 " with of the document(used by gd)
 set nowrap " don't automatically wrap on load
@@ -165,6 +168,9 @@ autocmd BufWritePre *.py execute ':Black'
 nnoremap <F9> :Black<CR>
 let g:ale_fix_on_save = 1
 
+" Code formatting
+autocmd FileType c,cpp,,javascript AutoFormatBuffer clang-format
+
 " =========================================================================
 
 let g:compe = {}
@@ -211,6 +217,11 @@ autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync(nil, 100)
 lua << EOF
 require'lspconfig'.pyright.setup{}
 EOF
+" For c/cpp code formating
+lua << EOF
+require'lspconfig'.ccls.setup{}
+EOF
+
 
 "=============================Run your code with F9 +===========================
 autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
@@ -224,5 +235,3 @@ autocmd filetype js nnoremap <F9> :w <bar> exec '!node '.shellescape('%')<CR>
  nnoremap <C-n> :NERDTree<CR>
  nnoremap <C-t> :NERDTreeToggle<CR>
  nnoremap <C-f> :NERDTreeFind<CR>
-
-
