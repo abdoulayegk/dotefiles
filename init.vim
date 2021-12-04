@@ -167,6 +167,8 @@ let g:ale_fixers = {
 autocmd BufWritePre *.py execute ':Black'
 nnoremap <F9> :Black<CR>
 let g:ale_fix_on_save = 1
+" TO enable virtual evironment python
+let g:python3_host_prog='/usr/bin/python3'
 
 " Code formatting
 autocmd FileType c,cpp,,javascript AutoFormatBuffer clang-format
