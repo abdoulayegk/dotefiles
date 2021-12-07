@@ -3,7 +3,7 @@ To install get my config just clone the repo and then open nvim
 ```bash
 git clone https://github.com/abdoulayegk/dotefiles.git ~/.config/nvim
 ```
-![Vimrc](https://github.com/abdoulayegk/Dotefiles/blob/main/nvimcpp.png)
+![Vimrc](https://github.com/abdoulayegk/dotefiles/blob/main/pythonimg.png)
 when you update this repo you might get this warning: The legacy Snopmate parser is deprecated. Please see : h SnipMate-deprecate.
 Add the following in your vimrc file: let g:snipMate = { 'snippet_version' : 1 }
 This will most probably fix the issue.
