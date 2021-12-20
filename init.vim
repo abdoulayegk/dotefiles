@@ -38,6 +38,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
+Plug 'python/black'
 
 call plug#end()
 
@@ -446,5 +447,6 @@ let g:ale_fixers = {
       \   'javascript': ['eslint'],
       \}
 let g:ale_fix_on_save = 1
+autocmd BufWritePre *.py execute ':Black'
 autocmd FileType c,cpp,,javascript AutoFormatBuffer clang-format " code formating
 
