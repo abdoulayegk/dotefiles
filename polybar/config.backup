@@ -1,0 +1,244 @@
+;==========================================================
+;
+;
+; ____        ___             __                        
+;/\  _`\     /\_ \           /\ \                       
+;\ \ \L\ \___\//\ \    __  __\ \ \____     __     _ __  
+; \ \ ,__/ __`\\ \ \  /\ \/\ \\ \ '__`\  /'__`\  /\`'__\
+;  \ \ \/\ \L\ \\_\ \_\ \ \_\ \\ \ \L\ \/\ \L\.\_\ \ \/ 
+;   \ \_\ \____//\____\\/`____ \\ \_,__/\ \__/.\_\\ \_\ 
+;    \/_/\/___/ \/____/ `/___/> \\/___/  \/__/\/_/ \/_/ 
+;                          /\___/                       
+;                          \/__/                        
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+;Note: future version will exclusive use .Xresouces colors for Polybar
+[colors]
+;background = ${xrdb:color0:#222}
+background = ${xrdb:background}
+background-alt = ${xrdb:highlight}
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/wm]
+monitor = ${env:MONITOR:eDP-1}
+width = 100%
+height = 35
+fixed-center = true
+override-redirect = true
+wm-restack = bspwm
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+;radius = 20
+
+line-size = 0
+line-color = #f00
+
+border-color = #00000000
+
+;offset-x = 3%:5
+;offset-y = 15
+
+padding-left = 5
+padding-right = 5
+
+module-margin-left = 3
+module-margin-right = 3
+
+font-0 = Noto Sans:pixelsize=14;2
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;1
+font-2 = FiraCode Nerd Font:pixelsize=14;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;3
+font-4 = FontAwesome:pixelsize=10
+
+modules-left = battery separator wlan separator backlight
+modules-center= bspwm
+modules-right= pulseaudio separator cpu separator date
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/cpu]
+type = internal/cpu
+label = "  "
+
+bar-load-width = 5
+bar-load-indicator = |
+bar-load-indicator-foreground = #fff
+bar-load-indicator-font = 1
+bar-load-fill = ─
+bar-load-fill-font = 3
+bar-load-fill-foreground = ${colors.background-alt}
+bar-load-empty = ─
+bar-load-empty-font = 3
+bar-load-empty-foreground = ${colors.foreground-alt}
+
+format = <label>  <bar-load>
+; Seconds to sleep between updates
+; Default: 1
+interval = 5
+
+[module/pulseaudio]
+type = internal/pulseaudio
+label-volume = "墳 "
+click-right = pavucontrol
+format-volume = "<label-volume>   <bar-volume>"
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+enable-scroll = true
+
+bar-volume-width = 5
+bar-volume-indicator = |
+bar-volume-indicator-foreground = #fff
+bar-volume-indicator-font = 0
+bar-volume-fill = ─
+bar-volume-fill-font = 3
+bar-volume-fill-foreground = ${colors.background-alt}
+bar-volume-empty = ─
+bar-volume-empty-font = 3
+bar-volume-empty-foreground = ${colors.foreground-alt}
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+[module/backlight]
+type = internal/backlight
+label= "    "
+card = intel_backlight
+format = "<label>  <bar>"
+
+;bar-width = 10
+;bar-indicator = |
+;bar-fill = ─
+;bar-empty = ─
+enable-scroll = true
+
+bar-width = 5
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 0
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = ${colors.background-alt}
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+[module/separator]
+type = custom/text
+content = " |"
+content-foreground = ${colors.background-alt}
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-foreground= ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 3
+
+label-occupied = %name%
+label-occupied-padding = 3
+
+label-urgent = %name%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
+
+; Separator in between workspaces
+label-separator = |
+label-separator-foreground= ${colors.background-alt}
+
+
+
+[module/mpd]
+type = internal/mpd
+format-online = "<label-song>          <icon-prev>     <icon-stop>     <toggle>    <icon-next>"
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 50
+label-song-ellipsis = true
+
+[module/wlan]
+type = internal/network
+interface = wlp59s0
+interval = 3.0
+
+format-connected = <label-connected>
+label-connected = ""    
+; %upspeed:9%"
+
+format-disconnected = "no internet"
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%{F#fb3d66}%a%{F-}"
+date-alt = "%{F#fb3d66}%d.%m.%Y%{F-}"
+
+time = %H:%M
+time-alt = 
+
+label = %date%  %time%
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = <animation-charging>  
+format-discharging = <ramp-capacity>   
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #fb3d66
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = #bf946b
+animation-charging-framerate = 750
+
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0 
+margin-bottom = 0 
+
+; vim:ft=dosini

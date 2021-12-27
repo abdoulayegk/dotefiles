@@ -1,0 +1,193 @@
+# minimal i3 configurations
+# GRUVBOX theme colors are set at the end
+
+# Set mod keys (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+
+# Autostart
+exec kitty
+
+
+# terminal
+bindsym $mod+Return exec i3-sensible-terminal
+# rofi
+bindsym $mod+d exec --no-startup-id rofi -show drun
+# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# kill container
+bindsym $mod+q kill
+
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit i3
+bindsym $mod+Control+Escape exec i3-msg exit
+# kill xorg server
+bindsym $mod+Shift+Escape exec pkill -15 Xorg
+
+# network Manager
+exec --no-startup-id nm-applet
+
+
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# Press $mod+o followed by either f, t, Escape or Return to launch firefox,
+# thunderbird or return to the default mode, respectively.
+set $mode_launcher Launch: [f]irefox [b]brave
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+    bindsym f exec firefox
+    bindsym b exec brave
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+#Display wallpaper
+ # exec feh --bg-scale /home/balde/Pictures/walp.jpg
+# Set wallpaper with feh
+exec --no-startup-id feh --bg-fill /home/balde/Pictures/wp.jpg
+
+
+# vim key navigations
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Control+h move left
+bindsym $mod+Control+j move down
+bindsym $mod+Control+k move up
+bindsym $mod+Control+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# new window split direction toggle
+bindsym $mod+t split toggle
+
+# scratchpad
+bindsym grave scratchpad show
+bindsym $mod+grave move scratchpad
+
+# floating windows
+floating_modifier $mod
+bindsym $mod+space floating toggle
+
+# split in horizontal orientation
+# bindsym $mod+h split h
+
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+#===================================================================================
+# Pulse Audio volume keys
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+
+
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+# font used by i3 for titles and bars
+font pango:Hack Nerd Font
+
+
+#start of bar section
+# bar {
+#     font pango:Hack Nerd Font
+#     status_command ~/.local/bin/bumblebee-status \
+#     -m time nic battery pasink pasource -p time.format="%H:%M"\
+#      -t  gruvbox-powerline
+#         position top
+    # }
+
+
+# You can also use any non-zero value if you'd like to have a border
+
+#i3 tweaks
+for_window [class="^.*"] border pixel 0
+new_window pixel
+
+# flamshot mod+shif+s
+bindsym $mod+Shift+s exec flameshot gui
+
+gaps outer 8
+gaps inner 10
+smart_gaps on
+
+exec --no-startup-id compton -b -f
+
+# startup applications
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id pulseaudio --start
+exec_always --no-startup-id lxpolkit
+exec_always --no-startup-id picom
+
+
+# keybinding for bluetooth
+bindsym $mod+b exec --no-startup-id rofi-bluetooth
+
+#Polybar launch script
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# start file manager

@@ -10,7 +10,9 @@
     "markdown",
     "typescript",
     "python",
-    "dart"
+    "py",
+    "c",
+    "cpp"
   ],
 
   // suggest settings
