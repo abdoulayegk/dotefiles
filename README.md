@@ -43,11 +43,11 @@ Feel free to open the init.vim and read about the key bindings that i have.
 
 | Mapping      | functionality                        |
 | ------------ | ------------------------------------ |
-| `;`          | commands key                         |
+| `F9`          | Run code python,c&cpp key           |
 | `,`          | leader key                           |
 | `leader + q` | close                                |
 | `leader + w` | save changes                         |
-| `leader + f` |  fizzy found using Telescope         |                          |
+| `leader + f` |  fizzy found using Telescope         |                    
 | `jj`         | equivalent to Esc                    |
 
 <span> You init.vim must be in this directory then only it will work: `$Home/.config/nvim`
