@@ -1,5 +1,6 @@
 # My linux config files
-
+![vimrc](https://github.com/abdoulayegk/dotefiles/blob/main/vimrcimg1.png)
+![Vimrc](https://github.com/abdoulayegk/dotefiles/blob/main/pythonimg.png)
 ## Requirements
 
 - Linux (not tested on other platforms)
@@ -52,7 +53,3 @@ Feel free to open the init.vim and read about the key bindings that i have.
 | `leader + f` |  fizzy found using Telescope         |                          |
 | `jj`         | equivalent to Esc                    |
 
-
-
-![vimrc](https://github.com/abdoulayegk/dotefiles/blob/main/vimrcimg1.png)
-![Vimrc](https://github.com/abdoulayegk/dotefiles/blob/main/pythonimg.png)
