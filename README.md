@@ -29,14 +29,11 @@ Then cd in the the directory type this command:
 ```bash
 cd dotefiles
 ```
-<spam> Note<spam> You only need to install neovim and put the init.vim into this direcotry<br/>
+<span> Note</span> You only need to install neovim and put the init.vim into this direcotry<br/>
  ```bash
   mv init.vim ~/.config/nvim
  ```
- That's all you then just open 
-
-
-after that open nevim and press Enter everything will get installed then enjoy nvim.
+ That's all you then open neovim  and press <span>Enter </span> everything will get installed then enjoy nvim.
   
 ### Feel free to create and issue if you find anything wired or face some problem. <br>
   
@@ -53,3 +50,4 @@ Feel free to open the init.vim and read about the key bindings that i have.
 | `leader + f` |  fizzy found using Telescope         |                          |
 | `jj`         | equivalent to Esc                    |
 
+<span> You init.vim must be in this directory then only it will work: `$Home/.config/nvim`
