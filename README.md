@@ -33,7 +33,7 @@ cd dotefiles
  ```bash
   mv init.vim ~/.config/nvim
  ```
- That's all you then open neovim  and press <span>Enter </span> everything will get installed then enjoy nvim.
+ That's all you then open neovim  and press *Enter* everything will get installed then enjoy nvim.
   
 ### Feel free to create and issue if you find anything wired or face some problem. <br>
   
