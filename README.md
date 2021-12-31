@@ -45,7 +45,7 @@ Feel free to open the init.vim and read about the key bindings that i have.
 | ------------ | ------------------------------------ |
 | `F9`          | Run code python,c&cpp key           |
 | `,`          | leader key                           |
-| `leader + q` | close                                |
+| `leader + e` | close                                |
 | `leader + w` | save changes                         |
 | `leader + f` |  fizzy found using Telescope         |                    
 | `jj`         | equivalent to Esc                    |
