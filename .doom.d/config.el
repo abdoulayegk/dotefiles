@@ -86,3 +86,4 @@
 
 ;; Maximize the startup screen
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
+

@@ -7,15 +7,18 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin(expand('~/.config/nvim/plugged'))
 
+call plug#begin(expand('~/.config/nvim/plugged'))
 
 " ================= looks and GUI stuff =======================================
 
 Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
 Plug 'luochen1990/rainbow'                              " rainbow parenthesis
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
-Plug 'morhetz/gruvbox'
+
+Plug 'morhetz/gruvbox'                                  " colorscheme
+
+
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdtree'
@@ -24,39 +27,44 @@ Plug 'tpope/vim-surround'
 " ================= Functionalities ===========================================
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
-" Telescope Requirements
+
+
+" Telescope fzf
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-"code snippets
+Plug 'nvim-treesitter/nvim-treesitter'
+
+
 Plug 'honza/vim-snippets'                               " actual snippets
 Plug 'sirver/UltiSnips'
 
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
 Plug 'tpope/vim-commentary'                             " better commenting
 Plug 'mhinz/vim-startify'                               " cool start up screen
 Plug 'tpope/vim-fugitive'                               " git support
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating
 
-" Code formatting (for c++ and python)
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
+" Code formatting python
 Plug 'python/black'
 
 
 call plug#end()
 
 " ================================= general config ============================
-"like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+"Quick quit command
+noremap <Leader>e :quit<CR>
+noremap <Leader>E :qa!<CR>
+inoremap jj <Esc>
 
 " Fast saving
-nmap <leader>w :w!<cr>
+map <leader>w :w!<cr>
 syntax enable
 syntax on
+
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <C-space> ?
 set updatetime=300
 set timeoutlen=500 " Fast saving
 set scrolloff=8
@@ -71,11 +79,11 @@ set nu
 set relativenumber
 set list listchars=trail:»,tab:»-           " use tab to navigate in list mode
 
+" for snippet
+let g:UltiSnipsEditSplit="vertical"
 
-"Quick quit command
-noremap <Leader>e :quit<CR>
-noremap <Leader>E :qa!<CR>
-inoremap jj <Esc>
+" rainbow brackets
+let g:rainbow_active = 1
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -107,7 +115,6 @@ set signcolumn=yes
 set showcmd
 set shell=/bin/sh
 set fo+=w
-cmap w!! %!sudo tee > /dev/null %
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.DS_Store
 set title
 set titleold="Terminal"
@@ -141,18 +148,6 @@ set completeopt=menuone,noselect
 " Source nvimrc file
 au! BufWritePost $MYVIMRC source % " Auto source the vimrc
 nnoremap <Leader>vm :source $MYVIMRC<CR>
-
-" Colorsheme
-colorscheme gruvbox
-hi Pmenu guibg='#00010a' guifg=white                    " popup menu colors
-hi Comment gui=italic cterm=italic                      " italic comments
-hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE          " search string highlight color
-hi NonText guifg=bg                                     " mask ~ on empty lines
-
-" colors for git (especially the gutter)
-hi DiffAdd  guibg=#0f111a guifg=#43a047
-hi DiffChange guibg=#0f111a guifg=#fdd835
-hi DiffRemoved guibg=#0f111a guifg=#e53935
 
 " coc multi cursor highlight color
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
@@ -257,8 +252,6 @@ let g:startify_custom_header = [
 " rainbow brackets
 let g:rainbow_active = 1
 
-" semshi settings
-let g:semshi#error_sign	= v:false              " let ms python lsp handle this
 
 " ======================== Commands ===========================================
 
@@ -266,11 +259,6 @@ au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto com
 au FileType help wincmd L                               " open help in vertical split
 au BufWritePre * :%s/\s\+$//e                           " remove trailing whitespaces before saving
 au CursorHold * silent call CocActionAsync('highlight') " highlight match on cursor hold
-
-" enable spell only if file type is normal text
-let spellable = ['markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
-autocmd BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell | endif
-
 
 " coc completion popup
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -304,7 +292,6 @@ autocmd BufReadPost *
 
 " python renaming and folding
 augroup python
-    autocmd FileType python nnoremap <leader>rn :Semshi rename <CR>
     autocmd FileType python set foldmethod=syntax
     autocmd FileType python syn sync fromstart
     autocmd FileType python syn region foldImports start='"""' end='"""' fold keepend
@@ -316,8 +303,6 @@ command! -nargs=0 Format :call CocAction('format')
 " organize imports
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" advanced grep
-" command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 " =============================================================================
 
 " startify file icons
@@ -344,7 +329,6 @@ endfunction
 
 " ======================== Custom Mappings ====================================
 
-nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
@@ -365,21 +349,24 @@ nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " markdown preview
 au FileType markdown nmap <leader>m :MarkdownPreview<CR>
 
-"" FZF
-nmap <leader>gc :Commits<CR>
-nmap <leader>gs :GFiles?<CR>
-nmap <leader>sh :History/<CR>
+"================================= telescope ==================================
+" nmap <leader>gc :Commits<CR>
+" nmap <leader>gs :GFiles?<CR>
+" nmap <leader>sh :History/<CR>
+
 
 " show mapping on all modes with F1
-
-"==============================================================================
 " Find files using Telescope command-line sugar.
 nnoremap <leader>f <cmd>Telescope find_files<cr>
 nnoremap <leader>g <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>h <cmd>Telescope help_tags<cr>
 
-
+" " Using Lua functions
+" nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " =================================== coc======================================
 
@@ -422,7 +409,7 @@ nmap <leader>a <Plug>(coc-codeaction-line)
 xmap <leader>a <Plug>(coc-codeaction-selected)
 
 " fugitive mappings
-nmap <leader>gd :Gdiffsplit<CR>
+" nmap <leader>gd :Gdiffsplit<CR>
 nmap <leader>gb :Git blame<CR>
 "=============================Run your code with F9 +===========================
 autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
@@ -432,12 +419,13 @@ autocmd filetype js nnoremap <F9> :w <bar> exec '!node '.shellescape('%')<CR>
 
 " ============================Linting and code formating========================
 
-let g:ale_linters = {
-    \ 'python': ['black'],
-    \ 'vim': ['vint'],
-    \ 'cpp': ['clang'],
-    \ 'c': ['clang']
-\}
+" let g:ale_linters = {
+"     \ 'python': ['black'],
+"     \ 'vim': ['vint'],
+"     \ 'cpp': ['clang'],
+"     \ 'c': ['clang']
+" \}
+
 
 " custom setting for clangformat
 let g:neoformat_cpp_clangformat = {
@@ -447,12 +435,12 @@ let g:neoformat_cpp_clangformat = {
 let g:neoformat_enabled_cpp = ['clangformat']
 let g:neoformat_enabled_c = ['clangformat']
 
-" let g:ale_fixers = {
-"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \   'python': ['black'],
-"       \   'javascript': ['eslint'],
-"       \}
 autocmd BufWritePre *.py execute ':Black'
-autocmd FileType c,cpp,,javascript AutoFormatBuffer clang-format " code formating
 
-
+" let g:coc_snippet_next = '<tab>'
+if $CONDA_PREFIX == ""
+  let s:current_python_path=$CONDA_PYTHON_EXE
+else
+  let s:current_python_path=$CONDA_PREFIX.'/bin/python'
+endif
+call coc#config('python', {'pythonPath': s:current_python_path})
