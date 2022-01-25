@@ -34,11 +34,11 @@ cd dotefiles
   mv init.vim ~/.config/nvim
  ```
  That's all you then open neovim  and press *Enter* everything will get installed then enjoy nvim.
-  
+
 ### Feel free to create and issue if you find anything wired or face some problem. <br>
-  
+
 Feel free to open the init.vim and read about the key bindings that i have.
-  
+
 #### Essentials
 
 | Mapping      | functionality                        |
@@ -47,7 +47,12 @@ Feel free to open the init.vim and read about the key bindings that i have.
 | `,`          | leader key                           |
 | `leader + e` | close                                |
 | `leader + w` | save changes                         |
-| `leader + f` |  fizzy found using Telescope         |                    
+| `leader + f` |  fizzy found using Telescope         |
 | `jj`         | equivalent to Esc                    |
 
 <span> You init.vim must be in this directory then only it will work: `$Home/.config/nvim`
+
+# Arch linux setup
+1.  Themes: https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme
+2. Icons: https://www.pling.com/p/1681475/
+Thanks to *Fausto-Korpsvart* for his amazing work.
