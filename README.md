@@ -56,3 +56,9 @@ Feel free to open the init.vim and read about the key bindings that i have.
 1.  Themes: https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme
 2. Icons: https://www.pling.com/p/1681475/
 Thanks to *Fausto-Korpsvart* for his amazing work.
+
+# Softwares I use:
+1. MPV video Player:![link](https://mpv.io/installation/)
+2. Neovim ==> Text editor
+3. Flameshot ===> Screenshot take
+4. OBS ==> Video Recording
