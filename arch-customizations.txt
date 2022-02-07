@@ -1,0 +1,17 @@
+TO change GDM to lgithdm do the following
+sudo pacman -S lgithdm lightdm-gtk-greeter
+sudo systemctl stop gdm.service
+sudo systemctl enable lightdm.service --force
+than you need to add the following to make it start
+sudo nvim /etc/lightdm/lightdm.conf
+
+edit session and put lightdm-gkt-greeter
+
+also if you want to add background image
+you need to do following: copy the image into the /etc/lgithdm folder can be done
+using following command: sudo cp walp.jpg /etc/lgithdm
+Then open the lightdm-gtk-greeter.conf file and put the path to the image
+in background
+then reboot or run this command: dm-tool switch-to-greeter
+
+
