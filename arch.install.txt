@@ -1,0 +1,65 @@
+lsblk: show devices
+parted /dev/sda
+mklabel msdos
+mkpart primary ext4 1MiB 100MiB
+set 1 boot on
+mkpart primary ext4 100 15GiB
+mkpart primary linux-swap15 16
+mkpart primary ext4 16 100%
+mkfs.ext4 /dev/sda1
+mkfs.ext4 /dev/sda2
+mkswap /dev/sda3
+mkfs.ext4 /dev/sda4
+
+swapon /dev/sda3
+
+mount /dev/sda2 /mnt
+
+mkdir -p /mnt/boot
+mount /dec/sda /mnt/boot
+mkdir -p /mnt/home
+most /dev/sda4 /mnt/home
+
+ip addr
+ping google
+
+pacstrap -i /mnt base base-devel
+
+genfstab -U /mnt > /mnt/etc/fstab
+arch-chroot /mnt /bin/bash
+
+nano /etc/locale.gen :: en_US ISO UTF
+
+locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+ln -sf /usr/share/zoneifo/EST5EDT /etc/localtime
+hwclock —systohc —utc
+mkinitcpio -p linux 
+paceman -S grub os-prober
+grub-install —recheck //dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+echo garbage > /ect/hostname
+nano /etc/hosts :: add host name
+
+pacman -S iw wpa-supplicant
+pacman -S dialog
+passwd
+exit
+unmount -R /mnt
+
+
+
+usseradd -m -G wheel -s /bin/bash rem
+
+passed rem
+
+paceman -S sudo
+nano /etc/sudoers >> uncomment wheel
+
+su - rem
+sudo paceman -Syu
+
+sudo paceman -S xors-server xorg-server-utils
+
+sudo paceman -S yaourt
