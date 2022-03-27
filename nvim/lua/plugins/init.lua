@@ -63,9 +63,8 @@ return require('packer').startup(function(use)
   use {'jose-elias-alvarez/null-ls.nvim', config = "require('null-ls-config')"}
   use {"folke/zen-mode.nvim", config = 'require("zen-mode-config")'}
   use {"folke/twilight.nvim", config = "require('twilight-config')"}
-  -- Added plugin
-    --> code snippets
-	use("L3MON4D3/LuaSnip") --> Snippets plugin
+--> code snippets
+  use("L3MON4D3/LuaSnip") --> Snippets plugin
   use("rafamadriz/friendly-snippets" )-- a bunch of snippets to use
 
 
@@ -81,5 +80,8 @@ return require('packer').startup(function(use)
 
     use {"romgrk/barbar.nvim"} --> tabs for neovim
     use{"kyazdani42/nvim-web-devicons"} --> enable iconsj
+
+    use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim' --> toggle diagnostics
+
 
 end)
