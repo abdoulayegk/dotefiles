@@ -1,7 +1,6 @@
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  use {'rose-pine/neovim', config = "vim.cmd('colorscheme rose-pine')"}
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
@@ -14,12 +13,12 @@ return require('packer').startup(function(use)
     event = "BufWinEnter",
     config = "require('lualine-config')"
   }
-  use {
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    event = "BufWinEnter",
-    config = "require('bufferline-config')"
-  }
+  -- use {
+  --   'akinsho/bufferline.nvim',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  --   event = "BufWinEnter",
+  --   config = "require('bufferline-config')"
+  -- }
   use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -76,4 +75,11 @@ return require('packer').startup(function(use)
      ft = 'markdown',
      run = 'cd app && yarn install'
      }
+
+     --> colorschemes
+    use {'ellisonleao/gruvbox.nvim'}
+
+    use {"romgrk/barbar.nvim"} --> tabs for neovim
+    use{"kyazdani42/nvim-web-devicons"} --> enable iconsj
+
 end)

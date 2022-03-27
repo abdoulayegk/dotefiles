@@ -2,42 +2,46 @@ local set = vim.opt
 local opt = vim.opt         		-- global/buffer/windows-scoped options
 local cmd = vim.cmd     				-- execute Vim commands
 
-vim.cmd('filetype plugin indent on')
-vim.o.shortmess = vim.o.shortmess .. 'c'
-vim.o.hidden = true
-vim.o.whichwrap = 'b,s,<,>,[,],h,l'
-vim.o.pumheight = 10
-vim.o.fileencoding = 'utf-8'
-vim.o.cmdheight = 2
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.opt.termguicolors = true
-vim.o.conceallevel = 0
-vim.o.showtabline = 2
-vim.o.showmode = false
-vim.o.backup = false
-vim.o.writebackup = false
-vim.o.updatetime = 300
-vim.o.timeoutlen = 100
-vim.o.clipboard = "unnamedplus"
-vim.o.hlsearch = false
-vim.o.ignorecase = true
-vim.o.scrolloff = 3
-vim.o.sidescrolloff = 5
-vim.o.mouse = "a"
-vim.wo.wrap = false
--- vim.wo.number = true
--- vim.o.cursorline = true
-vim.wo.signcolumn = "yes"
-vim.o.tabstop = 2
-vim.bo.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
-vim.bo.shiftwidth = 2
-vim.o.autoindent = true
-vim.bo.autoindent = true
-vim.o.expandtab = true
-vim.bo.expandtab = true
+
+-- set.shell = "/bin/sh"
+
+set.expandtab = true
+set.smarttab = true
+set.shiftwidth = 4
+set.tabstop = 4
+
+set.hlsearch = false
+set.incsearch = true
+set.ignorecase = true
+set.smartcase = true
+set.autoindent = true
+
+set.termguicolors = true
+set.showmode = false
+set.splitbelow = true
+set.splitright = true
+set.wrap = false
+set.breakindent = true
+set.scrolloff = 9
+set.fileencoding = "utf-8"
+set.conceallevel = 2
+
+set.relativenumber = true
+set.number = true
+-- set.cursorline = true
+set.wildmenu = true
+set.completeopt = "menuone,noselect"
+
+set.hidden = true
+set.mouse = "a"
+
+set.updatetime=300
+
+opt.colorcolumn = '80'        -- line lenght marker at 80 columns
+
+-- vim.notify = require("notify")
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
 
 -- remove whitespace on save
 cmd [[au BufWritePre * :%s/\s\+$//e]]
@@ -54,3 +58,6 @@ vim.o.fileformat = vim.bo.fileformat
 opt.wildignore = "__pycache__"
 opt.wildignore = opt.wildignore + { "*.o", "*~", "*.pyc", "*pycache*" }
 
+vim.g.python3_host_prog = '/usr/bin/python3'
+vim.opt.exrc = true
+------------------------------------------------------------------------------>
